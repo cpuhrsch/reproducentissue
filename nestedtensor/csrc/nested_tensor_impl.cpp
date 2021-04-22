@@ -10,11 +10,12 @@ namespace at {
 
 using namespace c10;
 
-NestedTensorImpl::NestedTensorImpl(bool none)
+NestedTensorImpl::NestedTensorImpl(int64_t payload)
     : TensorImpl(c10::DispatchKeySet({NestedTensorKey}), at::ones({}).dtype(),
                  at::ones({}).device()) {
   remove_autograd_key();
   key_set_ = key_set_ - c10::DispatchKeySet({DispatchKey::InplaceOrView});
+  payload_ = payload;
 }
 
 } // namespace at

@@ -9,13 +9,8 @@ namespace nested_tensor {
 
 using namespace torch::jit;
 
-at::Tensor nested_tensor_impl(
-    py::sequence list,
-    py::object dtype_,
-    py::object device_,
-    bool requires_grad,
-    bool pin_memory) {
-  auto result = at::detail::make_tensor<NestedTensorImpl>(false);
+at::Tensor nested_tensor_impl(int64_t payload) {
+  auto result = at::detail::make_tensor<NestedTensorImpl>(payload);
   return result;
 }
 

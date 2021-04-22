@@ -1,4 +1,5 @@
 import torch
 import nestedtensor
-print(nestedtensor._C.nested_tensor_impl)
+a = nestedtensor._C.nested_tensor_impl(4)
 
+b = torch.matmul(a, torch.tensor([1]))

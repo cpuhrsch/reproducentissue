@@ -10,8 +10,6 @@ namespace at {
 
 constexpr auto NestedTensorKey = DispatchKey::NestedTensor;
 
-struct NestedTensorImpl;
-
 template <class A>
 bool is_nested_tensor_impl(A tensor) {
   return tensor.unsafeGetTensorImpl()->key_set().has(at::NestedTensorKey);
@@ -29,26 +27,9 @@ bool is_nested_tensor_impl(A first, B second, C... other) {
 }
 
 struct NestedTensorImpl : public c10::TensorImpl {
-  explicit NestedTensorImpl(bool none);
-
-  int64_t dim() const override {
-    return 0;
-  }
-  int64_t numel() const override {
-    return 0;
-  }
-  bool is_contiguous(at::MemoryFormat memory_format) const override {
-    return true;
-  }
-  IntArrayRef sizes() const override {
-    TORCH_CHECK(
-        false,
-        "Internal error: NestedTensorImpl doesn't support sizes. Please file an issue on https://github.com/pytorch/nestedtensor");
-    return IntArrayRef(_sizes);
-  }
-  IntArrayRef strides() const override;
-
+  explicit NestedTensorImpl(int64_t payload);
  private:
+  int64_t payload_;
   std::vector<int64_t> _sizes;
 };
 
