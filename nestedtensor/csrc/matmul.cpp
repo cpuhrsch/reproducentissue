@@ -9,6 +9,7 @@ namespace at {
 
 Tensor NestedTensor_matmul(const Tensor& self, const Tensor& other) {
   std::cout << "Calling NestedTensor_matmul" << std::endl;
+  exit(1);
   return self;
 }
 
@@ -17,6 +18,7 @@ Tensor& NestedTensor_matmul_out(
     const Tensor& other,
     Tensor& result) {
   std::cout << "Calling NestedTensor_matmul_out" << std::endl;
+  exit(1);
   return result;
 }
 
