@@ -2,29 +2,11 @@
 #include <ATen/ATen.h>
 #include <ATen/MemoryOverlap.h>
 #include <c10/util/Metaprogramming.h>
-#include <nestedtensor/csrc/utils/nested_node.h>
-#include <nestedtensor/csrc/utils/nested_node_functions.h>
 #include <torch/csrc/autograd/autograd.h>
 #include <torch/extension.h>
 #include <torch/library.h>
 
-// #define TRACEPACKED 1
-// #define USEPACKED 1
-
-namespace torch {
-namespace nested_tensor {
-
-using TensorNode = NestedNode<at::Tensor>;
-using IValueNode = NestedNode<c10::IValue>;
-using SizeNode = NestedNode<c10::List<int64_t>>;
-using IntegerNode = NestedNode<int64_t>;
-
-} // namespace nested_tensor
-} // namespace torch
-
 namespace at {
-
-using namespace torch::nested_tensor;
 
 constexpr auto NestedTensorKey = DispatchKey::NestedTensor;
 
@@ -47,7 +29,7 @@ bool is_nested_tensor_impl(A first, B second, C... other) {
 }
 
 struct NestedTensorImpl : public c10::TensorImpl {
-  explicit NestedTensorImpl(TensorNode structure);
+  explicit NestedTensorImpl(bool none);
 
   int64_t dim() const override {
     return 0;
