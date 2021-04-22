@@ -8,6 +8,7 @@ namespace F = torch::nn::functional;
 namespace at {
 
 Tensor NestedTensor_matmul(const Tensor& self, const Tensor& other) {
+  std::cout << "Calling NestedTensor_matmul" << std::endl;
   return self;
 }
 
@@ -15,6 +16,7 @@ Tensor& NestedTensor_matmul_out(
     const Tensor& self,
     const Tensor& other,
     Tensor& result) {
+  std::cout << "Calling NestedTensor_matmul_out" << std::endl;
   return result;
 }
 
